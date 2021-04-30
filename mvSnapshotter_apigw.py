@@ -47,7 +47,7 @@ def getSnapshot():
 		return jsonify({'Error': 'Invalid API Key'})
 		abort(400)
 
-	mvSerials = [configDict['meraki']['mvserials']]
+	mvSerials = (configDict['meraki']['mvserial']).split(',')
 	if 'mvSerial' in postdata:
 		mvSerials = postdata['mvSerial'].split(',')
 
