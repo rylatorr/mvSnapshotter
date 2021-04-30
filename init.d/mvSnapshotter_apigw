@@ -15,10 +15,10 @@
 # Do NOT "set -e"
 
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
-PATH=/sbin:/usr/sbin:/bin:/usr/bin:/opt/mvSnapshotter
+PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/mvSnapshotter
 DESC="MV Snapshotter HTTP API Service"
 NAME=mvSnapshotter_apigw.py
-DAEMON=/opt/mvSnapshotter/$NAME
+DAEMON=/usr/local/mvSnapshotter/$NAME
 DAEMON_ARGS=""
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME

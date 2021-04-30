@@ -73,7 +73,8 @@ Call the web service using a GET request to
 
 ```http://[apigw]:[port]/api/v1.0/getSnapshot?apikey=abc123```
 
-If desired, Room name and/or MV serial numbers can be provided in the request:
+If desired, A different camera serial number and/or room name can be specified when making the request to 
+override the one configured in config.ini. Can be supplied in the POST body or as a GET parameter.
 
 ```http://[apigw]:[port]/api/v1.0/getSnapshot?apikey=abc123?&mvSerial=Q2JV-1ABC-1A1A,Q2JV-AB2C-ABCD&webexRoom=Priority Notifications```
 
@@ -87,23 +88,32 @@ POST would have a body as follows:
 }
 ```
 
-A different camera 
-serial number can be specified when making the request to override the one configured in config.ini.
-Also supplied in the POST body or as a GET parameter such as &mvSerial=Q2JV-1AAA-1A1A.
-
-You can choose to specify the Webex space to post with the parameter webexRoom=NotificationSpace.
-
 You can run the apigw component on demand from the command line:
 ```python mvSnapshotter_apigw.py```
 
-If running as a service you'll want to install appropriate startup scripts for your environment. A
-sample local rc file for Slackware Linux is provided. 
+If running as a service you'll want to install appropriate startup scripts for your environment. 
+This varies by system and personal preference but step-by-step install is illustrated below for
+Raspberry pi and Ubuntu Linux. A sample local rc file for Slackware Linux is also provided. 
 
-If installing to a raspberry pi, Ubuntu, or similar system:
-- untar or git clone into /opt/mvSnapshotter. 
-- copy init.d/mvSnapshotter_apigw to /etc/init.d/mvSnapshotter_apigw
-- Configure and start the service with:
+Raspberry pi (tested on buster) & Ubuntu (tested on 20.04.2.0 LTS) step-by-step setup:
 ```
+sudo apt update
+sudo apt upgrade
+sudo apt install git python3-pip
+cd /usr/local
+sudo git clone http://github.com/rylatorr/mvSnapshotter
+sudo chown -R [your unprivileged user acct] mvSnapshotter
+cd mvSnapshotter
+sudo pip3 install -r requirements.txt
+cd config
+cp config-sample.ini config.ini
+vi config.ini # (or pico. Edit)
+cd ..
+python3 mvSnapshotter.py # one-time test execution
+python3 mvSnapshotter_apigw.py # test HTTP gateway, then ctrl-c
+sudo cp init.d/mvSnapshotter_apigw /etc/init.d
+sudo chmod +x /etc/init.d/mvSnapshotter_apigw
 sudo update-rc.d mvSnapshotter_apigw defaults
 sudo service mvSnapshotter_apigw start
+sudo systemctl status mvSnapshotter_apigw.service # used to check status
 ```
