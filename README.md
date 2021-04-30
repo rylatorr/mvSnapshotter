@@ -95,7 +95,7 @@ If running as a service you'll want to install appropriate startup scripts for y
 This varies by system and personal preference but step-by-step install is illustrated below for
 Raspberry pi and Ubuntu Linux. A sample local rc file for Slackware Linux is also provided. 
 
-Raspberry pi (tested on buster) & Ubuntu (tested on 20.04.2.0 LTS) step-by-step setup:
+Raspberry pi & Ubuntu (tested on buster & 20.04.2.0 LTS) step-by-step setup:
 ```
 sudo apt update
 sudo apt upgrade
