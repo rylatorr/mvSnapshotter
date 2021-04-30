@@ -1,0 +1,18 @@
+#!/bin/sh
+# Sample run control file for use on Slackware Linux.
+
+case "$1" in
+start)
+  echo "Starting mv-snapshotter-apigw Flask service."
+  /usr/bin/python3 /usr/local/mvSnapshotter/mvSnapshotter_apigw.py &
+;;
+stop)
+  echo "Shutting down mv-snapshotter-apigw Flask service."
+  kill $(ps aux | grep mvSnapshotter_apigw | awk '{ print $2 }')
+;;
+*)
+  echo "Usage: $0 {start|stop}"
+  exit 1
+esac
+
+exit 0

@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 '''
 mvSnapshotter
 Author: Ryan LaTorre <ryan@latorre.ca>
